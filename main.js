@@ -12,15 +12,20 @@ btns.onclick = (event) => {
       } else if (event.target.classList.contains('prev-btn')){
         count--
       }
-      fetch(`https://jsonplaceholder.typicode.com/todos/${count}`)
-        .then(response => response.json())
-        .then(data => {
+
+      const url = 'https://jsonplaceholder.typicode.com/todos'
+      const getData = async () => {
+        const response = await fetch(`${url}/${count}`)
+        const data = await response.json()
+        console.log(data)
+        
           block.innerHTML = `
             <h2>${data.title}</h2>
             <span>${data.id}</span>
             <h3>${data.completed}</h3>
           `
-        })
+      }
+      getData()
 
     }
   }
